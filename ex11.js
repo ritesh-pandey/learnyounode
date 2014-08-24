@@ -1,8 +1,7 @@
-var http = require('http');
-
+var http = require('http'),
+fs = require('fs');
 var server = http.createServer(function(req, res) {
-	console.log(arguments);
-	res.write("Hello World");
-	res.close();
+	res.writeHead(200)//, {"Context-type": "text/plain-text"});
+	fs.createReadStream(process.argv[3]).pipe(res);
 });
-server.listen(process.argv[1]);
+server.listen(Number(process.argv[2]));
